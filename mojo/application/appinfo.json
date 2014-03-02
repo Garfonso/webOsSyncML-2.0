@@ -1,0 +1,10 @@
+{
+	"id": "info.mobo.syncml.client",
+	"version": "0.0.1",
+	"vendor": "Garfonso",
+	"type": "web",
+	"plug-ins": true,
+	"main": "index.html",
+	"title": "SyncML Client",
+	"icon": "icon.png"
+}

@@ -1,0 +1,6 @@
+Transition to 2.0:
+Good: in accounts template we can save additional config values => sync mode and datastore path!
+
+Kann das doofe Ding nicht einfach ical parsen??? Das so EXTREM nah an der Struktur...
+das ist doch albern, dass sie dafür nix bereit stellen. :(
+

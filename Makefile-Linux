@@ -1,0 +1,34 @@
+#g++ -O2 -I../cpp-sdk/include/funambol/common/ -I../cpp-sdk/include/funambol/posix/ -I/srv/preware/cross-compile/staging/armv7/usr/include/ -L../cpp-sdk/lib -L/srv/preware/cross-compile/staging/armv7/usr/lib -DENABLE_NAMESPACE -Wl,-Bstatic -lfunambol -Wl,-Bdynamic -lcurl -lssl -lcrypto -lz main.cpp WebOsCalendarSyncSource.cpp WebOsContactsSyncSource.cpp -o webOsSyncMLClient
+
+CC=/srv/preware/cross-compile/toolchain/arm-2009q1/bin/arm-none-linux-gnueabi-g++
+CFLAGS=-O2 -I../cpp-sdk/include/common \
+           -I../cpp-sdk/include/posix \
+           -I/srv/preware/cross-compile/staging/armv7/usr/include \
+           -DENABLE_NAMESPACE \
+           -c -nostdlib
+STATICLIBS=../cpp-sdk/lib/libfunambol.a
+LIBS=-lcurl -lssl -lcrypto -lz 
+LDFLAGS=-L../cpp-sdk/lib \
+        -L/srv/preware/cross-compile/staging/armv7/usr/lib \
+#        -Wl,-Bdynamic \
+#        -lcurl -lssl -lcrypto -lz \
+#        -Wl,-Bstatic -lfunambol \
+#        -Wl,-Bdynamic \
+
+SOURCES=main.cpp WebOsCalendarSyncSource.cpp WebOsContactsSyncSource.cpp
+OBJECTS=$(SOURCES:.cpp=.o)
+EXECUTABLE=webOsSyncMLClient
+
+# 
+all: $(OBJECTS) $(EXECUTABLE)
+
+$(EXECUTABLE): $(OBJECTS)
+	$(CC) $(LDFLAGS) -o $(EXECUTABLE) $(OBJECTS) -Wl,-Bstatic $(STATICLIBS) -Wl,-Bdynamic $(LIBS)
+
+#needed:
+	#$(CC) $(CFLAGS) $(SOURCES)
+
+.cpp.o:
+	$(CC) $(CFLAGS) $< -o $@
+	
+
